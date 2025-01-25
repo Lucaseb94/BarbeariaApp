@@ -1,0 +1,24 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Barbearia{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+  </head>
+  <body>
+    <!-- Navegação -->
+    {% include 'navbar.html' %}
+
+    <div class="container mt-4">
+      {% block content %}
+      <!-- O conteúdo específico de cada página será renderizado aqui -->
+      {% endblock %}
+    </div>
+
+    <!-- Rodapé -->
+    {% include 'footer.html' %}
+  </body>
+</html>

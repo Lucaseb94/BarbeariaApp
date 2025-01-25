@@ -1,0 +1,135 @@
+/* Reset padrão para remover margens e paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar {
+  display: flex; /* Ativa o Flexbox */
+  flex-direction: row;
+  justify-content: space-between; /* Espaço entre os elementos */
+  align-items: center; /* Alinha verticalmente */
+  background-color: #333; /* Cor de fundo */
+  padding: 15px 30px;
+  color: white;
+}
+
+/* Logo */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.links {
+  list-style: none;
+}
+/* Estilo dos links */
+.links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  padding: 1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.links a:hover {
+  color: #f4a261; /* Cor ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Empilha os elementos */
+    align-items: center;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+}
+
+/* Faz com que a página ocupe toda a altura da tela */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Faz com que o conteúdo ocupe o espaço disponível, empurrando o footer para baixo */
+.container {
+  flex: 1;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #111;
+  color: white;
+  font-family: "Arial", sans-serif;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+footer a {
+  color: #00bcd4; /* Cor futurista azul */
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  padding: 0 10px;
+  transition: all 0.3s ease;
+}
+
+footer a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #00bcd4;
+  bottom: 0;
+  left: 50%;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+footer a:hover {
+  color: #ff4081; /* Cor futurista rosa */
+  text-shadow: 0 0 8px rgba(255, 64, 129, 0.8); /* Brilho rosa */
+}
+
+footer a:hover::after {
+  width: 100%;
+}
+
+footer .footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+footer .footer-icons a {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+footer .footer-icons a:hover {
+  transform: scale(1.2); /* Efeito de aumento */
+  text-shadow: 0 0 10px rgba(255, 64, 129, 0.8); /* Brilho futurista */
+}

@@ -1,0 +1,15 @@
+<!-- templates/catalogo_servicos.html -->
+{% extends 'base.html' %} {% block title %} Catálogo de Serviços {% endblock %}
+{% block content %}
+<h1>Catálogo de Serviços</h1>
+<ul class="list-group">
+  {% for servico in servicos %}
+  <li class="list-group-item">
+    <strong>{{ servico.nome }}</strong> - R$ {{ servico.preco }}
+    <p>{{ servico.descricao }}</p>
+  </li>
+  {% empty %}
+  <li class="list-group-item">Nenhum serviço disponível.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

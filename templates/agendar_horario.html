@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Agendar Horário
+{% endblock %}
+
+{% block content %}
+    <h1>Agendar Horário</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Agendar</button>
+    </form>
+{% endblock %}
