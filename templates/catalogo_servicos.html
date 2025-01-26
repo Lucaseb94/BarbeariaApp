@@ -1,12 +1,19 @@
-<!-- templates/catalogo_servicos.html -->
-{% extends 'base.html' %} {% block title %} Catálogo de Serviços {% endblock %}
+{% extends 'base.html' %}
+{% block title %} Catálogo de Serviços {% endblock %}
+
 {% block content %}
 <h1>Catálogo de Serviços</h1>
 <ul class="list-group">
   {% for servico in servicos %}
   <li class="list-group-item">
+    <img 
+      src="{{ servico.foto_servico.url }}" 
+      alt="{{ servico.nome }}" 
+      style="width: 100px; height: auto; margin-right: 10px; float: left;"
+    >
     <strong>{{ servico.nome }}</strong> - R$ {{ servico.preco }}
     <p>{{ servico.descricao }}</p>
+    <div style="clear: both;"></div>
   </li>
   {% empty %}
   <li class="list-group-item">Nenhum serviço disponível.</li>

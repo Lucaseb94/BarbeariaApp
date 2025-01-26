@@ -30,6 +30,7 @@ class Agendamento(models.Model):
 
 class Servico(models.Model):
     nome = models.CharField(max_length=255)
+    foto_servico = models.ImageField(blank=True, null=True, default='default.jpg')
     descricao = models.TextField(blank=True, null=True)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     tempo_estimado = models.DurationField()

@@ -122,6 +122,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = '/media/'  # Caminho público para os arquivos de mídia
+MEDIA_ROOT = BASE_DIR / 'media'  # Diretório físico onde os arquivos serão armazenados
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
