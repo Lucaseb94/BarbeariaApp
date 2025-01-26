@@ -16,12 +16,10 @@ def agendar_horario(request):
     return render(request, 'agendar_horario.html', {'form': form})
 
 
-# agendamentos/views.py
 def sucesso_agendamento(request):
     return render(request, 'sucesso_agendamento.html')
 
 
-# Create your views here.
 def catalogo_servicos(request):
     servicos = Servico.objects.all()
     return render(request, 'catalogo_servicos.html', {'servicos': servicos})

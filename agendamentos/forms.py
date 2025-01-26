@@ -1,6 +1,6 @@
 from django import forms
 from .models import Agendamento
-from clientes.models import Cliente
+from clientes.models import Clientes
 from barbeiros.models import Barbeiro
 from .models import Servico
 
