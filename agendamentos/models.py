@@ -1,6 +1,7 @@
 from django.db import models
 from clientes.models import Clientes
 from barbeiros.models import Barbeiro
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Agendamento(models.Model):
@@ -24,7 +25,7 @@ class Agendamento(models.Model):
     def clean(self):
         # Validar se já existe um agendamento para o barbeiro no mesmo horário
         if Agendamento.objects.filter(barbeiro=self.barbeiro, data_agendamento=self.data_agendamento).exists():
-            raise ValidationError("O barbeiro já tem um agendamento para esse horário.")
+            raise ValidationError("Horário indisponível. Escolha outro horário.")
 
 
 

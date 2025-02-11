@@ -1,0 +1,88 @@
+/* Container do carrossel */
+.card-servicos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem; /* Aumentando o espaçamento entre os cards */
+    margin: 2rem auto; /* Ajustando margem para mais espaçamento */
+    justify-content: center;
+}
+
+/* Estilo do cartão */
+.card-servicos {
+    text-align: center;
+    width: 320px; /* Largura fixa para todos os cartões */
+    min-height: 600px; /* Garantindo uma altura mínima para todos os cartões */
+    border: 1px solid #ddd;
+    border-radius: 12px; /* Arredondando as bordas */
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombramento mais suave */
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo de forma vertical */
+    justify-content: space-between; /* Garante que o conteúdo ocupe o espaço total */
+}
+
+/* Efeito ao passar o mouse (hover) */
+.card-servicos:hover {
+    transform: translateY(-10px); /* Levantamento mais forte ao passar o mouse */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Aumentando o sombreamento */
+}
+
+/* Imagem do serviço */
+.card-servicos img {
+    width: 100%;
+    height: 350px; /* Altura fixada para a imagem */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    border-radius: 12px 12px 0 0; /* Bordas arredondadas no topo */
+}
+
+/* Informações do serviço */
+.card-servicos .servico-info {
+    padding: 2rem; /* Aumentando o padding para mais espaçamento */
+    background-color: #fff;
+    border-radius: 0 0 12px 12px; /* Mantendo bordas arredondadas no rodapé */
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo verticalmente */
+    justify-content: space-between; /* Garante que o botão fique na parte inferior */
+    flex-grow: 1; /* Permite que a área de conteúdo cresça e ocupe o espaço disponível */
+}
+
+/* Nome do serviço */
+.card-servicos .servico-info strong {
+    font-size: 1.3rem; /* Tamanho maior para o nome */
+    font-weight: bold;
+    margin-bottom: 1rem; /* Espaço entre o nome e a descrição */
+}
+
+/* Descrição do serviço */
+.card-servicos .servico-info p {
+    font-size: 1rem; /* Tamanho ajustado para a descrição */
+    color: #555;
+    margin-bottom: 1.5rem; /* Espaço entre a descrição e o preço */
+    flex-grow: 0; /* Evita que a descrição cresça e empurre os outros elementos */
+}
+
+/* Preço do serviço */
+.card-servicos .servico-info .preco {
+    font-size: 1.3rem; /* Tamanho do texto do preço */
+    font-weight:700;
+    color: #007bff; /* Cor do preço */
+    margin-bottom: 2rem; /* Espaço entre o preço e o botão */
+}
+
+/* Botão do serviço */
+.card-servicos .servico-info button {
+    padding: 1rem 2rem; /* Tamanho do botão */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px; /* Arredondando as bordas do botão */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center; /* Centraliza o botão */
+    margin-top: auto; /* Empurra o botão para a parte inferior do cartão */
+}
+
+/* Efeito do botão ao passar o mouse */
+.card-servicos .servico-info button:hover {
+    background-color: #0056b3;
+}

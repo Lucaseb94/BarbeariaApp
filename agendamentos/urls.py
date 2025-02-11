@@ -1,7 +1,9 @@
 from django.urls import path
-from . import views
+from .views import AgendarHorarioView, catalogo_servicos, sucesso_agendamento, login
 
 urlpatterns = [
-    path('catalogo/', views.catalogo_servicos, name='catalogo_servicos'),
-    path('agendar/', views.agendar_horario, name='agendar_horario'),
+    path('catalogo/', catalogo_servicos, name='catalogo_servicos'),
+    path('agendar/', AgendarHorarioView.as_view(), name='agendar_horario'),
+    path('sucesso-agendamento/', sucesso_agendamento, name='sucesso_agendamento'),
+    path('login/', login, name='login'),
 ]

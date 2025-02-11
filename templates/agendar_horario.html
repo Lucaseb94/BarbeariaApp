@@ -1,14 +1,80 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Agendar Horário
-{% endblock %}
-
 {% block content %}
-    <h1>Agendar Horário</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Agendar</button>
-    </form>
+<div class="cyber-container">
+    <div class="cyber-form-wrapper">
+        <div class="cyber-header">
+            <h1 class="cyber-title">
+                <span class="cyber-glitch" data-text="AGENDAMENTO_">AGENDAMENTO_</span>
+            </h1>
+            <p class="cyber-subtitle">Preencha os dados para reservar seu horário.</p>
+        </div>
+
+        <form method="POST" class="cyber-form">
+            {% csrf_token %}
+            
+            <!-- Cliente -->
+            <div class="cyber-input-group">
+                <label for="{{ form.cliente.id_for_label }}" class="cyber-label">
+                    <span class="cyber-icon">👤</span>
+                    Cliente
+                </label>
+                {{ form.cliente }}
+                {% if form.cliente.errors %}
+                    <div class="cyber-error">{{ form.cliente.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Barbeiro -->
+            <div class="cyber-input-group">
+                <label for="{{ form.barbeiro.id_for_label }}" class="cyber-label">
+                    <span class="cyber-icon">✂️</span>
+                    Barbeiro
+                </label>
+                {{ form.barbeiro }}
+            </div>
+
+            <!-- Data/Hora -->
+            <div class="cyber-input-group">
+                <label for="{{ form.data_agendamento.id_for_label }}" class="cyber-label">
+                    <span class="cyber-icon">⏰</span>
+                    Data e Hora
+                </label>
+                <input type="datetime-local" 
+                       class="cyber-input"
+                       id="{{ form.data_agendamento.id_for_label }}" 
+                       name="{{ form.data_agendamento.name }}"
+                       value="{{ form.data_agendamento.value|default_if_none:'' }}"
+                       required>
+            </div>
+
+            <!-- Serviços -->
+            <div class="cyber-input-group">
+                <label for="{{ form.servicos.id_for_label }}" class="cyber-label">
+                    <span class="cyber-icon">💈</span>
+                    Serviços
+                </label>
+                {{ form.servicos }}
+            </div>
+
+            <!-- Observações -->
+            <div class="cyber-input-group">
+                <label for="{{ form.observacoes.id_for_label }}" class="cyber-label">
+                    <span class="cyber-icon">📝</span>
+                    Observações
+                </label>
+                <textarea class="cyber-input cyber-textarea"
+                          id="{{ form.observacoes.id_for_label }}" 
+                          name="{{ form.observacoes.name }}" 
+                          placeholder="Digite suas observações...">{{ form.observacoes.value|default_if_none:'' }}</textarea>
+            </div>
+
+            <!-- Botão de Submit -->
+            <button type="submit" class="cyber-button">
+                <span class="cyber-button-text">Confirmar Agendamento</span>
+                <span class="cyber-button-gradient"></span>
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}
