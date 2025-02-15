@@ -6,7 +6,7 @@ from agendamentos.forms import AgendamentoForm
 from django.utils import timezone
 from datetime import timedelta, datetime
 from django.utils.timezone import make_aware
-import pdb
+
 
 
 @pytest.fixture
@@ -48,7 +48,7 @@ def agendamento(barbeiro, cliente):
 
 @pytest.mark.django_db
 class TestAgendarHorarioView:
-    pdb.set_trace()
+
     """
     Classe de teste para a view AgendarHorarioView.
     """
@@ -111,11 +111,14 @@ class TestAgendarHorarioView:
         """
         Testa o envio de um formulário com horário indisponível.
         """
+        # Define uma data futura relativa (por exemplo, amanhã às 18:00)
+        data_futura = (timezone.now() + timedelta(days=1)).replace(hour=18, minute=0, second=0, microsecond=0)
+        
         # Cria um agendamento no banco para simular um horário já ocupado
         agendamento = Agendamento.objects.create(
             cliente=cliente,
             barbeiro=barbeiro,
-            data_agendamento=make_aware(datetime(2025, 2, 10, 18, 0)),  # Exemplo de horário ocupado
+            data_agendamento=data_futura,
             status='pendente',
         )
 
@@ -124,21 +127,23 @@ class TestAgendarHorarioView:
 
         # Tenta agendar no mesmo horário do agendamento existente
         data = {
-        'barbeiro': barbeiro.id,
-        'data_agendamento': agendamento.data_agendamento.strftime('%Y-%m-%dT%H:%M'),
-        'servicos': [servico.id],
+            'barbeiro': barbeiro.id,
+            'data_agendamento': data_futura.strftime('%Y-%m-%dT%H:%M'),
+            'servicos': [servico.id],
         }
 
         # Acessa a view via POST
         url = reverse('agendar_horario')
-        response = client.post(url, data, follow=True)  # Adicionando follow=True para seguir redirects
+        response = client.post(url, data, follow=True)
 
         # Verifica se a mensagem esperada aparece na resposta
+        assert response.status_code == 200  # O formulário é reexibido com erro
         assert "Horário indisponível" in response.content.decode()
 
 
 
     def test_sem_autenticacao(self, client):
+
         """
         Testa o acesso à view sem autenticação.
         """
@@ -149,3 +154,88 @@ class TestAgendarHorarioView:
         # Verifica se o usuário foi redirecionado para a página de login
         assert response.status_code == 302
         assert response.url.startswith(reverse('login'))  # Supondo que a URL de login é 'login'
+
+    @pytest.mark.django_db
+    def test_data_agendamento_no_passado(self, barbeiro, servico):
+        """
+        Testa que o formulário não aceita agendamento no passado.
+        """
+        # Dados com data passada
+        data_passada = (timezone.now() - timedelta(hours=1)).strftime('%Y-%m-%dT%H:%M')
+        print(data_passada)
+        form_data = {
+            'barbeiro': barbeiro.id,
+            'data_agendamento': data_passada,
+            'sevicos': [servico.id]
+        }
+
+        form = AgendamentoForm(data=form_data)
+        print(form)
+        # O formulário não deve ser válido
+        assert not form.is_valid()
+        # Verifica se a mensagem de erro está presente
+        assert "O horário deve ser no futuro." in form.errors.get('data_agendamento', [])
+
+    @pytest.mark.django_db
+    def test_data_agendamento_no_futuro(self, barbeiro, servico):
+        """
+        Testa que o formulário aceita agendamento no futuro.
+        """
+
+        # Dados com data futura
+        data_futura = (timezone.now() + timedelta(hours=2)).strftime('%Y-%m-%dT%H:%M')
+        form_data = {
+            'barbeiro': barbeiro.id,
+            'data_agendamento': data_futura,
+            'servicos': [servico.id],
+        }
+
+        form = AgendamentoForm(data=form_data)
+
+        assert form.is_valid()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
